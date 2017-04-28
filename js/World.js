@@ -70,8 +70,8 @@ World.prototype.init = function(){
 };
 
 World.prototype.shift = function(x,y){
-  this.center.h += x;
-  this.center.v += y;
+  this.center.h += x * 0.1;
+  this.center.v += y * 0.1;
 };
 
 World.prototype.makeGrid = function(cols,rows){

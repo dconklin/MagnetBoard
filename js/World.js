@@ -28,13 +28,12 @@ var World = function(){
     y: 0
   };
   this.currentZDepth = 0;
+  this.isDragging = false;
 
 };
 
 World.prototype.init = function(){
 
-  this.mousePos.x = mouseX;
-  this.mousePos.y = mouseY;
 
   background(this.bgColor);
   rectMode(CENTER);
@@ -67,8 +66,11 @@ World.prototype.init = function(){
     this.center.v = this.initialCenter.v + (this.windowDif.y/2);
   }
 
+};
 
-
+World.prototype.updateMouse = function(){
+  this.mousePos.x = mouseX;
+  this.mousePos.y = mouseY;
 };
 
 World.prototype.shift = function(x,y){
@@ -78,15 +80,16 @@ World.prototype.shift = function(x,y){
     var obj = this.objects[i];
     if(this.mousePos.x >= obj.boundingBox.x+this.center.h && this.mousePos.x <= (obj.boundingBox.x+this.center.h) + obj.boundingBox.w
         && this.mousePos.y >= (obj.boundingBox.y+this.center.v) && this.mousePos.y <= (obj.boundingBox.y+this.center.v) + obj.boundingBox.h){
-          obj.isSelected = true;
           this.selectedObjects.push(obj);
         }
   }
 
-  if(this.selectedObjects.length == 0){
+  if(this.selectedObjects.length == 0 || this.isDragging){
     // nothing selected. move world.
     this.center.h += x * 0.1;
     this.center.v += y * 0.1;
+
+    this.isDragging = true;
   } else {
     // selected things. Move them.
     var sel;
@@ -99,11 +102,15 @@ World.prototype.shift = function(x,y){
 
     sel.zDepth = this.currentZDepth--;
 
-    sel.setPosition(x,y);
+    sel.setPosition(mouseX-this.center.h-(sel.boundingBox.w/2),mouseY-this.center.v+(sel.boundingBox.h/4));
     sel.display();
 
   }
 
+};
+
+World.prototype.clearSelection = function () {
+  this.selectedObjects = [];
 };
 
 World.prototype.makeGrid = function(cols,rows){

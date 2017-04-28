@@ -60,10 +60,6 @@ Sentence.prototype.layout = function(){
   this.lines = lines;
   this.maxWidth = maxWidth;
 
-};
-
-Sentence.prototype.display = function(){
-
   push();
     translate(this.x - this.maxWidth/2, this.y);
 
@@ -75,7 +71,7 @@ Sentence.prototype.display = function(){
 
         var curWord = this.lines[i][j];
         curWord.setPosition(offset.x,offset.y);
-        curWord.display();
+
         offset.x += prefs.wordSpacing + curWord.boundingBox.w;
       }
       offset.x = 0;
@@ -83,5 +79,13 @@ Sentence.prototype.display = function(){
     }
 
   pop();
+
+};
+
+Sentence.prototype.display = function(){
+
+  for(var i = 0; i < this.wordCount; i++){
+    this.words[i].display();
+  }
 
 };

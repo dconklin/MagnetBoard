@@ -38,8 +38,12 @@ Word.prototype.update = function(){
 Word.prototype.setPosition = function(x,y){
   this.x = x;
   this.y = y;
-
 };
+
+Word.prototype.updatePosition = function(x,y){
+  this.x += x;
+  this.y += y;
+}
 
 Word.prototype.display = function(x,y){
 

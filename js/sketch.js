@@ -35,12 +35,9 @@ function setup() {
 
 function draw() {
   w.init();
+  w.updateMouse();
   sent.run();
   // wrd.display();
-
-
-
-
 }
 
 function mouseDragged(){
@@ -54,4 +51,9 @@ function mouseDragged(){
   dif.x = 0;
   dif.y = 0;
 
+}
+
+function mouseReleased(){
+  w.clearSelection();
+  w.isDragging = false;
 }

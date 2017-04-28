@@ -22,13 +22,15 @@ var World = function(){
     v:this.windowSize.height/2
   };
   this.objects = [];
-  this.selectedObjects = [];
+  this.possibleSelects = [];
+  this.selection;
   this.mousePos = {
     x: 0,
     y: 0
   };
   this.currentZDepth = 0;
   this.isDragging = false;
+  this.hasSelected = false;
 
 };
 
@@ -80,37 +82,48 @@ World.prototype.shift = function(x,y){
     var obj = this.objects[i];
     if(this.mousePos.x >= obj.boundingBox.x+this.center.h && this.mousePos.x <= (obj.boundingBox.x+this.center.h) + obj.boundingBox.w
         && this.mousePos.y >= (obj.boundingBox.y+this.center.v) && this.mousePos.y <= (obj.boundingBox.y+this.center.v) + obj.boundingBox.h){
-          this.selectedObjects.push(obj);
+          this.possibleSelects.push(obj);
         }
   }
 
-  if(this.selectedObjects.length == 0 || this.isDragging){
+  if(this.possibleSelects.length == 0 || this.isDragging){
     // nothing selected. move world.
     this.center.h += x * 0.1;
     this.center.v += y * 0.1;
 
     this.isDragging = true;
   } else {
-    // selected things. Move them.
-    var sel;
-    var dpth = 0;
-    for(var i = 0; i < this.selectedObjects.length; i++){
-      if(this.selectedObjects[i].zDepth <= dpth){
-        sel = this.selectedObjects[i];
+
+    if(!this.hasSelected){
+      var dpth = 0;
+      for(var i = 0; i < this.possibleSelects.length; i++){
+        if(this.possibleSelects[i].zDepth <= dpth){
+          this.selection = this.possibleSelects[i];
+          this.selection.isSelected = true;
+          this.selection.zDepth = this.currentZDepth--
+          this.hasSelected = true;
+        }
       }
+
+    } else {
+      this.selection.setPosition(mouseX-this.center.h-(this.selection.boundingBox.w/2),mouseY-this.center.v+(this.selection.boundingBox.h/4));
+      this.selection.display();
     }
-
-    sel.zDepth = this.currentZDepth--;
-
-    sel.setPosition(mouseX-this.center.h-(sel.boundingBox.w/2),mouseY-this.center.v+(sel.boundingBox.h/4));
-    sel.display();
 
   }
 
 };
 
 World.prototype.clearSelection = function () {
-  this.selectedObjects = [];
+
+  // reset everything to do with selection;
+
+  this.possibleSelects = [];
+  this.selection = null;
+  this.hasSelected = false;
+  for(var i = 0; i < this.objects.length; i++){
+    this.objects[i].isSelected = false;
+  }
 };
 
 World.prototype.makeGrid = function(cols,rows){

@@ -50,7 +50,12 @@ Word.prototype.display = function(x,y){
   this.update();
 
   fill(prefs.fontBgColor);
-  noStroke();
+  if(!this.isSelected){
+    noStroke();
+  } else {
+    strokeWeight(2);
+    stroke('#ff0000');
+  }
   rectMode(CORNER);
   rect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.w, this.boundingBox.h);
 

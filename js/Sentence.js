@@ -83,8 +83,16 @@ Sentence.prototype.layout = function(){
 
 Sentence.prototype.display = function(){
 
+  // Sort words based on Z-Depth. This brings a word to the front
+  // whenever you click on it !!
+  var sortedWords = this.words.sort(function(a,b){
+    if(a.zDepth > b.zDepth){ return -1; }
+    if(a.zDepth < b.zDepth){ return 1; }
+    if(a.zDepth == b.zDepth){ return 0; }
+  })
+
   for(var i = 0; i < this.wordCount; i++){
-    this.words[i].display();
+    sortedWords[i].display();
   }
 
 };

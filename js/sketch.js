@@ -7,10 +7,10 @@ var prefs = {
   bgColor: '#ececec',
 
   font: undefined,
-  fontSize: 20,
+  fontSize: 18,
   fontColor: '#eeeeee',
-  fontBgColor: '#444444',
-  fontPadding: 15,
+  fontBgColor: '#382c47',
+  fontPadding: 20,
 
   sentenceMaxWidth: 300,
   wordSpacing: 5,
@@ -20,7 +20,7 @@ var prefs = {
 var w,wrd,sent;
 
 function preload() {
-  prefs.font = loadFont('../fonts/SourceSansPro-Regular.ttf');
+  prefs.font = loadFont('../fonts/SourceSansPro-Semibold.ttf');
 }
 
 function setup() {
@@ -29,7 +29,10 @@ function setup() {
   textSize(prefs.fontSize);
 
   w = new World();
-  sent = new Sentence('The quick brown fox jumps over the lazy dog.',0,0);
+
+  var xLoc = random(w.canvasSize.width * -0.25, w.canvasSize.width * 0.25);
+  var yLoc = random(w.canvasSize.width * -0.25, w.canvasSize.width * 0.25);
+  sent = new Sentence('The quick brown fox jumps over the lazy dog.',xLoc,yLoc);
   // wrd = new Word("Hello",30,30);
 }
 

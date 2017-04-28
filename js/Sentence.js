@@ -61,7 +61,6 @@ Sentence.prototype.layout = function(){
   this.maxWidth = maxWidth;
 
   push();
-    translate(this.x - this.maxWidth/2, this.y);
 
     //display each word.
     var counter = 0;
@@ -70,7 +69,7 @@ Sentence.prototype.layout = function(){
       for(var j = 0; j < this.lines[i].length; j++){
 
         var curWord = this.lines[i][j];
-        curWord.setPosition(offset.x,offset.y);
+        curWord.setPosition(this.x+offset.x,this.y+offset.y);
 
         offset.x += prefs.wordSpacing + curWord.boundingBox.w;
       }

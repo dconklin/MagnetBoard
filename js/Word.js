@@ -49,12 +49,12 @@ Word.prototype.display = function(x,y){
 
   this.update();
 
-  fill('#ff0000');
+  fill(prefs.fontBgColor);
   noStroke();
   rectMode(CORNER);
   rect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.w, this.boundingBox.h);
 
-  fill('#000000');
+  fill(prefs.fontColor);
   noStroke();
   text(this.text, this.bounds.x, this.bounds.y+this.bounds.h);
 

@@ -45,7 +45,7 @@ World.prototype.init = function(){
   rect(0,0,this.canvasSize.width-100,this.canvasSize.height-100);
 
   // make grid.
-  this.makeGrid(20,10);
+  this.makeGrid(40,20);
 
   // make center dot (remove this later);
   fill('#ff0000');

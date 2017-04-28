@@ -13,10 +13,11 @@ var prefs = {
   fontPadding: 15,
 
   sentenceMaxWidth: 300,
-  wordSpacing: 5
+  wordSpacing: 5,
+  leading: 40
 }
 
-var w,wrd;
+var w,wrd,sent;
 
 function preload() {
   prefs.font = loadFont('../fonts/SourceSansPro-Regular.ttf');
@@ -28,12 +29,14 @@ function setup() {
   textSize(prefs.fontSize);
 
   w = new World();
-  wrd = new Word("Hello",30,30);
+  sent = new Sentence('The quick brown fox jumps over the lazy dog.',0,0);
+  // wrd = new Word("Hello",30,30);
 }
 
 function draw() {
   w.init();
-  wrd.display();
+  sent.run();
+  // wrd.display();
 
 
 

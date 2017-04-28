@@ -22,10 +22,12 @@ var World = function(){
     v:this.windowSize.height/2
   };
   this.objects = [];
+  this.selectedObjects = [];
   this.mousePos = {
     x: 0,
     y: 0
   };
+  this.currentZDepth = 0;
 
 };
 
@@ -70,8 +72,38 @@ World.prototype.init = function(){
 };
 
 World.prototype.shift = function(x,y){
-  this.center.h += x * 0.1;
-  this.center.v += y * 0.1;
+
+  for(var i = 0; i < this.objects.length; i++){
+
+    var obj = this.objects[i];
+    if(this.mousePos.x >= obj.boundingBox.x+this.center.h && this.mousePos.x <= (obj.boundingBox.x+this.center.h) + obj.boundingBox.w
+        && this.mousePos.y >= (obj.boundingBox.y+this.center.v) && this.mousePos.y <= (obj.boundingBox.y+this.center.v) + obj.boundingBox.h){
+          obj.isSelected = true;
+          this.selectedObjects.push(obj);
+        }
+  }
+
+  if(this.selectedObjects.length == 0){
+    // nothing selected. move world.
+    this.center.h += x * 0.1;
+    this.center.v += y * 0.1;
+  } else {
+    // selected things. Move them.
+    var sel;
+    var dpth = 0;
+    for(var i = 0; i < this.selectedObjects.length; i++){
+      if(this.selectedObjects[i].zDepth <= dpth){
+        sel = this.selectedObjects[i];
+      }
+    }
+
+    sel.zDepth = this.currentZDepth--;
+
+    sel.setPosition(x,y);
+    sel.display();
+
+  }
+
 };
 
 World.prototype.makeGrid = function(cols,rows){

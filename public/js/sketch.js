@@ -97,6 +97,8 @@ function mouseReleased() {
 function getTweets() {
   loadJSON(/tweets/ + 'Brooklyn' + '/' + '4', function(tweets) {
 
+
+
     // Just stick them in the window
     for (var i = 0; i < tweets.length; i++) {
       var xLoc = random(w.windowSize.width * -0.25, w.windowSize.width *

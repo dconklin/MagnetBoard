@@ -12,7 +12,7 @@ var prefs = {
   },
 
   font: undefined, //set in preload()
-  fontSize: 12,
+  fontSize: 18,
   fontColor: '#eeeeee',
   fontBgColor: '#382c47',
   fontPadding: 20,
@@ -23,36 +23,26 @@ var prefs = {
 
 };
 
-var w, wrd, th, sentences;
+var w, wrd, sentences;
 
 function preload() {
   prefs.font = loadFont('../fonts/OpenSansEmoji.ttf');
-
-
-
 }
 
 function setup() {
+
+
 
   createCanvas(prefs.windowWidth, prefs.windowHeight);
   textFont(prefs.font);
   textSize(prefs.fontSize);
 
   w = new World();
-  // th = new TweetHandler();
-
-  loadJSON(/tweets/ + 'Brooklyn' + '/' + '2', function(tweets) {
-    // th.getTweets(tweets);
-    console.log(tweets)
-    for (var i = 0; i < tweets.length; i++) {
-      sentences.push(new Sentence(tweets[i].text, 0, 0));
-    }
-  });
 
 
 
-  // th.init();
-  // sentences = th.generateSentences();
+  sentences = [];
+  getTweets();
 
 }
 
@@ -100,4 +90,20 @@ function mouseReleased() {
   w.clearSelection();
   w.isDragging = false;
 
+}
+
+// API FUNCTIONS
+
+function getTweets() {
+  loadJSON(/tweets/ + 'Brooklyn' + '/' + '4', function(tweets) {
+
+    // Just stick them in the window
+    for (var i = 0; i < tweets.length; i++) {
+      var xLoc = random(w.windowSize.width * -0.25, w.windowSize.width *
+        0.25);
+      var yLoc = random(w.windowSize.width * -0.25, w.windowSize.width *
+        0.25);
+      sentences.push(new Sentence(tweets[i].text, xLoc, yLoc));
+    }
+  });
 }

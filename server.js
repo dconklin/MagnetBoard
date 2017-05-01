@@ -43,15 +43,16 @@ var T = new Twit(config);
 // });
 
 // This route searches twitter
-app.get('/tweets/:query', getTweets);
+app.get('/tweets/:query/:count', getTweets);
 
 // Callback
 function getTweets(req, res) {
   // Here's the string we are seraching for
   var query = req.params.query;
+  var cnt = req.params.count;
 
   // Execute a Twitter API call
-  T.get('search/tweets', { q: query, count: 10 }, gotData);
+  T.get('search/tweets', { q: query, geocode: '40.696694,-73.929139,1mi',  count: cnt }, gotData);
 
   // Callback
   function gotData(err, data) {

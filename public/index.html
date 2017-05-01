@@ -1,6 +1,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
+
   <script language="javascript" type="text/javascript" src="js/libraries/p5.js"></script>
   <!-- uncomment lines below to include extra p5 libraries -->
   <!--<script language="javascript" src="libraries/p5.dom.js"></script>-->
@@ -10,13 +12,85 @@
   <script language="javascript" type="text/javascript" src="js/Word.js"></script>
   <script language="javascript" type="text/javascript" src="js/Sentence.js"></script>
   <!-- this line removes any default padding and style. you might only need one of these values set. -->
-  <style> body {padding: 0; margin: 0;} </style>
+  <style>
+
+    body {padding: 0; margin: 0;}
+
+    #userInput {
+    }
+
+    .fields {
+      font-family: 'Noto Sans', serif;
+      font-weight: bold;
+      font-size: 14px;
+      float: left;
+      padding-left: 5px;
+      padding-right: 15px;
+      vertical-align: middle;
+      height: 50px;
+    }
+
+    #submit {
+      margin-top: 12px;
+      width: 150px;
+      font-family: 'Noto Sans', serif;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    label p {
+      display: inline-block;
+      padding-right: 5px;
+    }
+
+
+  </style>
 </head>
 
 <body>
 
-  <input id='location' value='enter location', size='50'></input>
-  <button id='getLocation'>Get!</button>
+  <div id='userInput'>
+    <div class='fields'>
+      <label class='label'>
+        <p>Search Term</p>
+        <input id='query' class='textfield' value='Search Term', size='15'></input>
+      </label>
+    </div>
+    <div class='fields'>
+      <label class='label'>
+        <p>Lattitude (Decimal)</p>
+        <input id='lat' class='textfield' value='40.697879' size='15'></input>
+      </label>
+    </div>
+    <div class='fields'>
+      <label class='label'>
+        <p>Longitude (Decimal)</p>
+        <input id='long' class='textfield' value='-73.929394' size='15'></input>
+      </label>
+    </div>
+    <div class='fields'>
+      <label class='label'>
+        <p>Radius (miles)</p>
+        <input id='rad' class='textfield' value='3' size='5'></input>
+      </label>
+    </div>
+    <div class='fields'>
+      <label class='label'>
+        <p>Count</p>
+        <input id='count' class='textfield' value='3' size='5'></input>
+      </label>
+    </div>
+    <div class='fields' id='buttonWrapper'>
+      <button id='submit' type="submit">Search!</button>
+    </div>
+  </div>
+
+
+
+
+
+
+
 
 </body>
 </html>

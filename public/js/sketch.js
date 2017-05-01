@@ -23,15 +23,15 @@ var prefs = {
 
 };
 
-var w,wrd,sent;
+var w,wrd,sentences;
 
 function preload() {
-  prefs.font = loadFont('../fonts/SourceSansPro-Semibold.ttf');
+  prefs.font = loadFont('../fonts/OpenSansEmoji.ttf');
 }
 
 function setup() {
 
-  getTweets();
+
 
   createCanvas(prefs.windowWidth, prefs.windowHeight);
   textFont(prefs.font);
@@ -39,9 +39,10 @@ function setup() {
 
   w = new World();
 
-  var xLoc = random(w.windowSize.width * -0.25, w.windowSize.width * 0.25);
-  var yLoc = random(w.windowSize.width * -0.25, w.windowSize.width * 0.25);
-  sent = new Sentence('The quick brown fox jumps over the lazy dog.',xLoc,yLoc);
+
+
+  sentences = [];
+  getTweets();
 
 }
 
@@ -49,11 +50,19 @@ function draw() {
 
   w.init();
   w.updateMouse();
-  sent.run();
+
+  for(var i = 0; i < sentences.length; i++){
+    sentences[i].run();
+  }
 
 }
 
 function move(){
+  if(mouseX < 0 || mouseX > w.windowSize.width || mouseY < 0 || mouseY > w.windowSize.height) {
+    return;
+  }
+
+
 
   var dif = {
     x: mouseX - w.mousePos.x,
@@ -85,10 +94,15 @@ function mouseReleased(){
 // API FUNCTIONS
 
 function getTweets() {
-  loadJSON(/tweets/ + 'banana', function(tweets) {
+  loadJSON(/tweets/ + 'Brooklyn' + '/' + '4', function(tweets) {
+
+
+
   // Just stick them in the window
   for (var i = 0; i < tweets.length; i++) {
-    console.log(tweets[i].text);
+    var xLoc = random(w.windowSize.width * -0.25, w.windowSize.width * 0.25);
+    var yLoc = random(w.windowSize.width * -0.25, w.windowSize.width * 0.25);
+    sentences.push(new Sentence(tweets[i].text, xLoc, yLoc) );
   }
 });
 }

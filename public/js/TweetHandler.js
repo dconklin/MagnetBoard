@@ -1,6 +1,6 @@
 var TweetHandler = function(){
 
-  this.tweets = [];
+  this.messages = [];
   this.locations = [];
   this.locationRange = {
     xMin: 90,
@@ -20,19 +20,28 @@ TweetHandler.prototype.init = function () {
 
 TweetHandler.prototype.getTweets = function () {
 
-  loadJSON(/tweets/ + 'Brooklyn' + '/' + '4', function(tweets) {
+  var gotTweets = function(tweets) {
 
     this.count = tweets.length;
 
+    var msgs = [];
+    var locs = [];
+
     // Just stick them in the window
     for (var i = 0; i < tweets.length; i++) {
-      this.tweets.push(tweets[i].text);
-      this.locations.push(tweets[i].coordinates.coordinates);
+      msgs.push(tweets[i].text);
+      locs.push(tweets[i].coordinates.coordinates);
     }
 
-    console.log('this.tweets:' + this.tweets);
+    this.messages = msgs;
+    this.locations = locs;
 
-  });
+  };
+
+  loadJSON(/tweets/ + 'Brooklyn' + '/' + '4', gotTweets);
+
+
+
 };
 
 TweetHandler.prototype.defineRange = function () {
@@ -66,8 +75,8 @@ TweetHandler.prototype.getScreenPosition = function (loc) {
 
 TweetHandler.prototype.formatTweets = function(){
 
-  for(var i = 0; i < this.tweets.length; i++){
-    this.tweets[i].replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
+  for(var i = 0; i < this.messages.length; i++){
+    this.messages[i].replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
   }
 
 };
@@ -77,7 +86,7 @@ TweetHandler.prototype.generateSentences = function () {
   for(var i = 0; i < this.count; i++){
     var pos = this.getScreenPosition(this.locations[i]);
     var holder = [];
-    holder.push( new Sentence(this.tweets[i], pos[0], pos[1]) );
+    holder.push( new Sentence(this.messages[i], pos[0], pos[1]) );
   }
 
   return holder;

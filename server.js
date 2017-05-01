@@ -1,8 +1,3 @@
-// A2Z F16
-// Daniel Shiffman
-// http://shiffman.net/a2z
-// https://github.com/shiffman/A2Z-F16
-
 // Using express: http://expressjs.com/
 var express = require('express');
 // Create the app
@@ -16,7 +11,7 @@ var server = app.listen(process.env.PORT || 3000, listen);
 function listen() {
   var host = server.address().address;
   var port = server.address().port;
-  console.log('Example app listening at http://' + host + ':' + port);
+  console.log('Listening at http://' + host + ':' + port);
 }
 
 // This is for hosting files
@@ -52,7 +47,11 @@ function getTweets(req, res) {
   var cnt = req.params.count;
 
   // Execute a Twitter API call
-  T.get('search/tweets', { q: query, geocode: '40.696694,-73.929139,1mi',  count: cnt }, gotData);
+  T.get('search/tweets', {
+    q: query,
+    geocode: '40.696694,-73.929139,1mi',
+    count: cnt
+  }, gotData);
 
   // Callback
   function gotData(err, data) {
@@ -71,13 +70,15 @@ function postTweet(req, res) {
   var statement = req.query.status;
 
   // Post that tweet!
-  T.post('statuses/update', { status: statement }, tweeted);
+  T.post('statuses/update', {
+    status: statement
+  }, tweeted);
 
   function tweeted(err, reply) {
     // If there was an error let's respond with that error
     if (err) {
       res.send(err);
-    // Otherwise let's respond back that it worked ok!
+      // Otherwise let's respond back that it worked ok!
     } else {
       res.send(reply);
     }

@@ -1,0 +1,33 @@
+{
+  "name": "magnetboard",
+  "version": "1.0.0",
+  "description": "Project which reads tweets from an entered location and maps them onto the screen in the form of fridge magnet tiles.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dconklin/MagnetBoard.git"
+  },
+  "keywords": [
+    "bot",
+    "twitter",
+    "magnet",
+    "p5",
+    "p5js",
+    "processing"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dconklin/MagnetBoard/issues"
+  },
+  "homepage": "https://github.com/dconklin/MagnetBoard#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "request": "^2.81.0",
+    "twit": "^2.2.5"
+  }
+}

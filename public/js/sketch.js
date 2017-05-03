@@ -7,42 +7,44 @@ var prefs = {
 
   bgColor: '#ececec',
   gridCount: {
-    cols: 80,
+    cols: 70,
     rows: 40
   },
 
   font: undefined, //set in preload()
-  fontSize: 18,
+  fontSize: 14,
   fontColor: '#eeeeee',
   fontBgColor: '#382c47',
-  fontPadding: 20,
+  fontPadding: 16,
 
   sentenceMaxWidth: 300,
-  wordSpacing: 5,
-  leading: 40
+  wordSpacing: 1,
+  leading: 35
 
 };
 
-var w, wrd, sentences;
+var w, th, sentences;
+var tweetHolder = [];
 
 function preload() {
-  prefs.font = loadFont('../fonts/OpenSansEmoji.ttf');
+  prefs.font = loadFont('../fonts/SourceSansPro-Regular.ttf');
+  getTweets();
 }
 
 function setup() {
 
-
-
   createCanvas(prefs.windowWidth, prefs.windowHeight);
-  textFont(prefs.font);
+  // textFont(prefs.font);
   textSize(prefs.fontSize);
 
   w = new World();
 
+  th = new TweetHandler();
+  th.update(tweetHolder);
 
+  console.log(th);
 
-  sentences = [];
-  getTweets();
+  sentences = th.generateSentences();
 
 }
 
@@ -50,6 +52,7 @@ function draw() {
 
   w.init();
   w.updateMouse();
+  w.makeRadar(th.locationRange, 10);
 
   for (var i = 0; i < sentences.length; i++) {
     sentences[i].run();
@@ -58,8 +61,8 @@ function draw() {
 }
 
 function move() {
-  if (mouseX < 0 || mouseX > w.windowSize.width || mouseY < 0 || mouseY > w.windowSize
-    .height) {
+  if (mouseX < 0 || mouseX > w.windowSize.width || mouseY < 0 ||
+    mouseY > w.windowSize.height) {
     return;
   }
 
@@ -95,17 +98,9 @@ function mouseReleased() {
 // API FUNCTIONS
 
 function getTweets() {
-  loadJSON(/tweets/ + 'Brooklyn' + '/' + '4', function(tweets) {
+  loadJSON(/tweets/ + 'Brooklyn' + '/' + '100', function(tweets) {
 
+    tweetHolder = tweets;
 
-
-    // Just stick them in the window
-    for (var i = 0; i < tweets.length; i++) {
-      var xLoc = random(w.windowSize.width * -0.25, w.windowSize.width *
-        0.25);
-      var yLoc = random(w.windowSize.width * -0.25, w.windowSize.width *
-        0.25);
-      sentences.push(new Sentence(tweets[i].text, xLoc, yLoc));
-    }
   });
 }

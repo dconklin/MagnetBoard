@@ -49,8 +49,9 @@ function getTweets(req, res) {
   // Execute a Twitter API call
   T.get('search/tweets', {
     q: query,
-    geocode: '40.696694,-73.929139,1mi',
-    count: cnt
+    geocode: '40.696694,-73.929139,3mi',
+    count: cnt,
+    include_entities: false
   }, gotData);
 
   // Callback

@@ -30,6 +30,7 @@ var prefs = {
 
 };
 
+<<<<<<< HEAD
 var requestParams = {
   query: '',
   latitude: '',
@@ -56,11 +57,20 @@ function preload() {
 
   getTweets();
 
+=======
+var w, wrd, th;
+var sentences = [];
+var allTweets = [];
+var submitbtn;
+
+
+function preload() {
+  prefs.font = loadFont('../fonts/OpenSansEmoji.ttf');
+  getTweets();
+>>>>>>> origin/master
 }
 
 function setup() {
-
-
 
   createCanvas(prefs.windowWidth, prefs.windowHeight);
   // textFont(prefs.font);
@@ -68,23 +78,28 @@ function setup() {
 
   w = new World();
   th = new TweetHandler();
+<<<<<<< HEAD
 
   getTweets();
   th.update(tweetHolder);
   sentences = th.generateSentences();
+=======
+  th.update(allTweets);
 
 
-}
+  // submitbtn = select('#submit');
+  // submitbtn.mousePressed(getTweets);
+>>>>>>> origin/master
+
+
+
+} // end setup.
 
 function draw() {
 
   w.init();
   w.updateMouse();
   w.makeRadar(th.locationRange, 10);
-
-  for (var i = 0; i < sentences.length; i++) {
-    sentences[i].run();
-  }
 
 }
 
@@ -93,8 +108,6 @@ function move() {
     mouseY > w.windowSize.height) {
     return;
   }
-
-
 
   var dif = {
     x: mouseX - w.mousePos.x,
@@ -125,11 +138,19 @@ function mouseReleased() {
 
 // API FUNCTIONS
 
+<<<<<<< HEAD
 function getTweets() {
 
   console.log('loading tweets@')
 
   loadJSON(/tweets/ + 'Brooklyn' + '/' + '3' + '/' + '300', function(tweets) {
     tweetHolder = tweets;
+=======
+var getTweets = function() {
+  loadJSON(/tweets/ + 'Brooklyn' + '/' + '10', function(tweets) {
+    for (var i = 0; i < tweets.length; i++) {
+      allTweets.push(tweets[i]);
+    }
+>>>>>>> origin/master
   });
-}
+};

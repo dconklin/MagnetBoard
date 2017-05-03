@@ -54,8 +54,7 @@ World.prototype.init = function() {
   // make grid.
   this.makeGrid(prefs.gridCount.cols, prefs.gridCount.rows);
 
-  // make center dot (remove this later);
-  fill('#ff0000');
+  fill(prefs.originColor);
   ellipse(0, 0, 10, 10);
 
 
@@ -144,7 +143,7 @@ World.prototype.makeGrid = function(cols, rows) {
 
   var gridStyle = {
     weight: 1,
-    color: '#cccccc'
+    color: prefs.gridColor
   };
 
   // draw vertical lines.
@@ -198,12 +197,17 @@ World.prototype.makeRadar = function(range, cnt) {
 
   push();
 
-  stroke('#FF0000');
+  var c = color(prefs.radarColor);
+  var r = red(c);
+  var g = green(c);
+  var b = blue(c);
+
+  stroke(r, g, b, 40);
 
   // draw circles.
   for (var i = 0; i < cnt; i++) {
     noFill();
-    strokeWeight(0.5);
+    strokeWeight(1);
     ellipseMode(CENTER);
     ellipse(0, 0, (i + 1) * rad, (i + 1) * rad)
   }
@@ -214,7 +218,7 @@ World.prototype.makeRadar = function(range, cnt) {
 
   noStroke();
   fill('#FF0000');
-  text(radSize.toFixed(2) + 'mi', rad / 4, 0);
+  text((radSize / 2).toFixed(2) + 'mi', (rad / 2) - 50, 0);
 
 
   pop();

@@ -6,15 +6,21 @@ var prefs = {
   canvasHeight: 2160,
 
   bgColor: '#ececec',
+  gridColor: '#cccccc',
   gridCount: {
     cols: 70,
     rows: 40
   },
+  tweetLocatorColor: '#FF0000',
+  originColor: '#FF0000',
+  radarColor: '#FF0000',
 
   font: undefined, //set in preload()
   fontSize: 14,
   fontColor: '#eeeeee',
   fontBgColor: '#382c47',
+  hashtagBgColor: '#f45942',
+  retweetBgColor: '#b73578',
   fontPadding: 16,
 
   sentenceMaxWidth: 300,
@@ -41,9 +47,6 @@ function setup() {
 
   th = new TweetHandler();
   th.update(tweetHolder);
-
-  console.log(th);
-
   sentences = th.generateSentences();
 
 }

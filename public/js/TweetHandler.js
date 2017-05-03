@@ -93,7 +93,8 @@ TweetHandler.prototype.formatTweets = function() {
 
   for (var i = 0; i < this.messages.length; i++) {
     this.messages[i] = this.messages[i].replace(/(?:https?|ftp):\/\/[\n\S]+/g,
-      '').replace('&amp;', '&');
+      '').replace('&amp;', '&').replace('\r', '').replace('\n', '');
+    console.log(this.messages[i]);
   }
 
 };

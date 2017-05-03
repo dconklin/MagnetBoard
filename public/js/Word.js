@@ -25,6 +25,7 @@ var Word = function(text, x, y) {
 };
 
 Word.prototype.update = function() {
+
   this.bounds = prefs.font.textBounds(this.text, this.x, this.y, prefs.fontSize);
 
   this.boundingBox = {
@@ -56,7 +57,29 @@ Word.prototype.display = function(x, y) {
     textFont(prefs.font);
   }
 
-  fill(prefs.fontBgColor);
+  var type = '';
+  if (this.text.charAt(0) == '#' && this.text.length > 1) {
+    type = 'hashtag';
+  } else if (this.text.charAt(0) == "@" && this.text.length > 1) {
+    type = 'retweet';
+  } else {
+    type = 'text';
+  }
+
+  fill(prefs.fontColor);
+
+  switch (type) {
+    case 'hashtag':
+      fill(prefs.hashtagBgColor);
+      break;
+    case 'retweet':
+      fill(prefs.retweetBgColor);
+      break;
+    default:
+      fill(prefs.fontBgColor);
+      break;
+  }
+
   if (!this.isSelected) {
     noStroke();
   } else {
@@ -64,7 +87,8 @@ Word.prototype.display = function(x, y) {
     stroke('#ff0000');
   }
   rectMode(CORNER);
-  rect(this.boundingBox.x, this.boundingBox.y, this.boundingBox.w, this.boundingBox
+  rect(this.boundingBox.x, this.boundingBox.y, textWidth(this.text) + prefs.fontPadding,
+    this.boundingBox
     .h);
 
   fill(prefs.fontColor);

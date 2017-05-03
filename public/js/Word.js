@@ -84,7 +84,7 @@ Word.prototype.display = function(x, y) {
     noStroke();
   } else {
     strokeWeight(5);
-    stroke('#ff0000');
+    stroke(prefs.selectionColor);
   }
   rectMode(CORNER);
   rect(this.boundingBox.x, this.boundingBox.y, textWidth(this.text) + prefs.fontPadding,

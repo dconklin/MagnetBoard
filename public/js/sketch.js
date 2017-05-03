@@ -5,15 +5,15 @@ var prefs = {
   canvasWidth: 3840,
   canvasHeight: 2160,
 
-  bgColor: '#ececec',
+  bgColor: '#efefef',
   gridColor: '#cccccc',
   gridCount: {
     cols: 70,
     rows: 40
   },
-  tweetLocatorColor: '#FF0000',
-  originColor: '#FF0000',
-  radarColor: '#FF0000',
+  tweetLocatorColor: '#f45942',
+  originColor: '#f45942',
+  radarColor: '#f45942',
 
   font: undefined, //set in preload()
   fontSize: 14,
@@ -22,6 +22,7 @@ var prefs = {
   hashtagBgColor: '#f45942',
   retweetBgColor: '#b73578',
   fontPadding: 16,
+  selectionColor: '#f45942',
 
   sentenceMaxWidth: 300,
   wordSpacing: 1,
@@ -29,25 +30,49 @@ var prefs = {
 
 };
 
+var requestParams = {
+  query: '',
+  latitude: '',
+  longitude: '',
+  radius: '',
+  count: ''
+}
+
+var queryField, latitudeField, longitudeField, radiusField, countField,
+  getTweetsButton, updateButton;
+
 var w, th, sentences;
 var tweetHolder = [];
 
 function preload() {
-  prefs.font = loadFont('../fonts/SourceSansPro-Regular.ttf');
+  prefs.font = loadFont('../font/SourceSansPro-Regular.otf');
+  queryField = select('#searchQuery');
+  latitudeField = select('#latitude');
+  longitudeField = select('#longitude');
+  radiusField = select('#radiusField');
+  countField = select('#count');
+  getTweetsButton = select('#getTweetsButton');
+  updateButton = select('#updateButton');
+
   getTweets();
+
 }
 
 function setup() {
+
+
 
   createCanvas(prefs.windowWidth, prefs.windowHeight);
   // textFont(prefs.font);
   textSize(prefs.fontSize);
 
   w = new World();
-
   th = new TweetHandler();
+
+  getTweets();
   th.update(tweetHolder);
   sentences = th.generateSentences();
+
 
 }
 
@@ -101,9 +126,10 @@ function mouseReleased() {
 // API FUNCTIONS
 
 function getTweets() {
-  loadJSON(/tweets/ + 'Brooklyn' + '/' + '100', function(tweets) {
 
+  console.log('loading tweets@')
+
+  loadJSON(/tweets/ + 'Brooklyn' + '/' + '3' + '/' + '300', function(tweets) {
     tweetHolder = tweets;
-
   });
 }

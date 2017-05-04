@@ -202,7 +202,7 @@ World.prototype.makeRadar = function(range, cnt) {
   var g = green(c);
   var b = blue(c);
 
-  stroke(r, g, b, 40);
+  stroke(r, g, b, 80);
 
   // draw circles.
   for (var i = 0; i < cnt; i++) {

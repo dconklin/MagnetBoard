@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 var TweetHandler = function() {
-=======
-var TweetHandler = function(tweets) {
->>>>>>> origin/master
 
   this.tweets;
   this.count;
@@ -21,7 +17,6 @@ var TweetHandler = function(tweets) {
 TweetHandler.prototype.update = function(theTweets) {
 
   this.tweets = theTweets; // replace all tweets.
-<<<<<<< HEAD
   var cnt = 0;
 
   // split tweet objects into their message
@@ -31,14 +26,6 @@ TweetHandler.prototype.update = function(theTweets) {
     // that don't.
     if (this.tweets[i].coordinates) {
       cnt++;
-=======
-  this.count = theTweets.length; // new length;
-
-  // split tweet objects into their message
-  // and coordinate components
-  for (var i = 0; i < this.count; i++) {
-    if (this.tweets[i].coordinates) {
->>>>>>> origin/master
       this.messages.push(this.tweets[i].text);
       this.locations.push(this.tweets[i].coordinates.coordinates);
     } else {
@@ -46,27 +33,14 @@ TweetHandler.prototype.update = function(theTweets) {
     }
   }
 
-<<<<<<< HEAD
   this.count = cnt;
 
   // define range
   this.defineRange();
-=======
-  // define range
-  // this.defineRange();
-  console.log('hello')
-  console.log(this.messages)
->>>>>>> origin/master
 
   // format tweets
   this.formatTweets();
 
-<<<<<<< HEAD
-=======
-
-  return this.generateSentences();
-
->>>>>>> origin/master
 };
 
 TweetHandler.prototype.defineRange = function() {
@@ -88,7 +62,6 @@ TweetHandler.prototype.defineRange = function() {
 
   }
 
-<<<<<<< HEAD
   var xdif = this.locationRange.xMax - this.locationRange.xMin;
   var ydif = this.locationRange.yMax - this.locationRange.yMin;
 
@@ -100,26 +73,17 @@ TweetHandler.prototype.defineRange = function() {
   // this.locationRange.yMin -= ydif;
 
 
-=======
->>>>>>> origin/master
 
 };
 
 TweetHandler.prototype.getScreenPosition = function(loc) {
 
-<<<<<<< HEAD
   var xPos = map(loc[1], this.locationRange.xMin, this.locationRange.xMax, w.canvasSize
     .padding, w.canvasSize.width - w.canvasSize.padding) - (w.canvasSize.width /
     2);
   var yPos = map(loc[0], this.locationRange.yMin, this.locationRange.yMax, w.canvasSize
     .padding, w.canvasSize.height - w.canvasSize.padding) - (w.canvasSize.height /
     2);
-=======
-  var xPos = map(loc[1], this.locationRange.xMin, this.locationRange.xMax, 0,
-    w.canvasSize.width);
-  var yPos = map(loc[0], this.locationRange.yMin, this.locationRange.yMax, 0,
-    w.canvasSize.height);
->>>>>>> origin/master
 
   return [xPos, yPos];
 
@@ -128,28 +92,17 @@ TweetHandler.prototype.getScreenPosition = function(loc) {
 TweetHandler.prototype.formatTweets = function() {
 
   for (var i = 0; i < this.messages.length; i++) {
-<<<<<<< HEAD
     this.messages[i] = this.messages[i].replace(/(?:https?|ftp):\/\/[\n\S]+/g,
       '').replace('&amp;', '&').replace('\r', '').replace('\n', '');
-=======
-    this.messages[i].replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
->>>>>>> origin/master
   }
 
 };
 
 TweetHandler.prototype.generateSentences = function() {
-<<<<<<< HEAD
   var holder = [];
   for (var i = 0; i < this.count; i++) {
     var pos = this.getScreenPosition(this.locations[i]);
 
-=======
-
-  for (var i = 0; i < this.count; i++) {
-    var pos = this.getScreenPosition(this.locations[i]);
-    var holder = [];
->>>>>>> origin/master
     holder.push(new Sentence(this.messages[i], pos[0], pos[1]));
   }
 

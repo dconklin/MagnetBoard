@@ -27,7 +27,7 @@
     </div>
 
     <div id="optionsbar">
-      <p class='label'>Query:</p>
+      <p class='label'>Word, #Hastag or @Handle:</p>
       <input id="searchQuery" class="topcoat-text-input inputval" value="Brooklyn" />
       <p class='label'>Latitude (Decimal):</p>
       <input id="latitude" class="topcoat-text-input inputval" value="40.697879" />
@@ -35,12 +35,21 @@
       <input id="longitude" class="topcoat-text-input inputval" value="-73.929394" />
       <p class='label'>Radius (Miles):</p>
       <input id="radius" class="topcoat-text-input inputval" value="3" />
-      <p class='label'>Count:</p>
+      <p class='label'>Max Tweets:</p>
       <input id="count" class="topcoat-text-input inputval" value="100" />
       <button id="getTweetsButton" class="topcoat-button btn">Get Tweets</button>
-      <button id="updateButton" class="topcoat-button--cta btn">Update!</button>
+      <button id="updateButton" class="topcoat-button--cta btn" disabled>Update!</button>
     </div>
 
+    <div id='optionsbar-info'>
+      <p>Query works best with a single word, handle or hashtag. Radius works best when kept small (below 5). Large radii return tweets without precise coordinates.</p>
+    </div>
+
+    <div id='wordAdder'>
+      <p class='label'>Add Your Own Text:</p>
+      <input id='userText' class='topcoat-text-input inputval' value='' placeholder='Enter your text here.'/>
+      <button id='submitTextButton' class='topcoat-button--cta btn'>Add Text</button>
+    </div>
 
   </div>
 

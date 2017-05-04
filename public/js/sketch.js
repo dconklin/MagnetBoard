@@ -5,7 +5,7 @@ var prefs = {
   canvasWidth: 3840,
   canvasHeight: 2160,
 
-  bgColor: '#efefef',
+  bgColor: '#ececec',
   gridColor: '#cccccc',
   gridCount: {
     cols: 70,
@@ -32,17 +32,22 @@ var prefs = {
 
 
 var requestParams = {
-  query: '',
-  latitude: '',
-  longitude: '',
-  radius: '',
-  count: ''
+  query: 'Brooklyn',
+  latitude: '40.697879',
+  longitude: '-73.929394',
+  radius: '3',
+  count: '100'
+}
+
+var reloadParams = {
+  gotTweets: false,
+  doneUpdate: false
 }
 
 var queryField, latitudeField, longitudeField, radiusField, countField,
-  getTweetsButton, updateButton;
+  getTweetsButton, updateButton, userTextField, submitUserTextButton;
 
-var w, th, sentences;
+var w, th, sentences, dataLayer;
 var tweetHolder = [];
 
 function preload() {
@@ -50,16 +55,21 @@ function preload() {
   queryField = select('#searchQuery');
   latitudeField = select('#latitude');
   longitudeField = select('#longitude');
-  radiusField = select('#radiusField');
+  radiusField = select('#radius');
   countField = select('#count');
   getTweetsButton = select('#getTweetsButton');
   updateButton = select('#updateButton');
+  userTextField = select('#userText');
+  submitUserTextButton = select('#submitTextButton');
+
 
   getTweets();
 
 }
 
 function setup() {
+
+  dataLayer = createGraphics(prefs.windowWidth, prefs.windowHeight);
 
   createCanvas(prefs.windowWidth, prefs.windowHeight);
   // textFont(prefs.font);
@@ -68,19 +78,43 @@ function setup() {
   w = new World();
   th = new TweetHandler();
 
-  th = new TweetHandler();
   th.update(tweetHolder);
   sentences = th.generateSentences();
 
-
-  // submitbtn = select('#submit');
-  // submitbtn.mousePressed(getTweets);
+  getTweetsButton.mousePressed(function(){
 
 
+    requestParams.query = encodeURIComponent(queryField.value());
+    requestParams.latitude = latitudeField.value();
+    requestParams.longitude = longitudeField.value();
+    requestParams.radius = radiusField.value();
+    requestParams.count = countField.value();
+    getTweets();
+
+    reloadParams.gotTweets = true;
+  });
+
+  updateButton.mousePressed(function(){
+    th = new TweetHandler();
+    th.update(tweetHolder);
+    sentences = th.generateSentences();
+    reloadParams.doneUpdate = true;
+    reloadParams.gotTweets = false;
+  });
+
+  submitUserTextButton.mousePressed(function(){
+    sentences.push( new Sentence(userTextField.value(), 0, 0) );
+  });
 
 } // end setup.
 
 function draw() {
+
+  if(!reloadParams.gotTweets){
+    document.getElementById('updateButton').disabled = true;
+  } else {
+    document.getElementById('updateButton').disabled = false;
+  }
 
   w.init();
   w.updateMouse();
@@ -89,6 +123,17 @@ function draw() {
   for (var i = 0; i < sentences.length; i++) {
     sentences[i].run();
   }
+
+  dataLayer.smooth();
+  dataLayer.fill(prefs.fontBgColor);
+  dataLayer.noStroke();
+  dataLayer.rect(15,10,115,20);
+  dataLayer.fill(prefs.fontColor);
+  dataLayer.textFont(prefs.font);
+  dataLayer.textSize(14);
+  dataLayer.text('Total Tweets: ' + th.messages.length, 20, 25);
+
+  image(dataLayer,w.initialCenter.h-w.center.h-w.windowSize.width/2, w.initialCenter.v-w.center.v-w.windowSize.height/2);
 
 }
 
@@ -127,7 +172,15 @@ function mouseReleased() {
 
 // API FUNCTIONS
 function getTweets() {
-  loadJSON(/tweets/ + 'Brooklyn' + '/' + '3' + '/' + '100', function(tweets) {
+
+  var path = '/tweets/' +
+  requestParams.query + '/' +
+  requestParams.latitude + '/' +
+  requestParams.longitude + '/' +
+  requestParams.radius + '/' +
+  requestParams.count;
+
+  loadJSON(path, function(tweets) {
 
     tweetHolder = tweets;
 

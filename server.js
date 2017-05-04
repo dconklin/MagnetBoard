@@ -38,19 +38,21 @@ var T = new Twit(config);
 // });
 
 // This route searches twitter
-app.get('/tweets/:query/:rad/:count', getTweets);
+app.get('/tweets/:query/:lat/:long/:rad/:count', getTweets);
 
 // Callback
 function getTweets(req, res) {
   // Here's the string we are seraching for
   var query = req.params.query;
+  var lat = req.params.lat;
+  var long = req.params.long;
   var cnt = req.params.count;
   var rad = req.params.rad;
 
   // Execute a Twitter API call
   T.get('search/tweets', {
     q: query,
-    geocode: '40.696694,-73.929139,' + rad + 'mi',
+    geocode: lat + ',' + long + ',' + rad + 'mi',
     count: cnt,
     include_entities: false
   }, gotData);

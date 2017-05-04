@@ -143,7 +143,7 @@ World.prototype.makeGrid = function(cols, rows) {
 
   var gridStyle = {
     weight: 1,
-    color: prefs.gridColor
+    color: color( red(color(prefs.gridColor)), green(color(prefs.gridColor)), blue(color(prefs.gridColor)), 80 )
   };
 
   // draw vertical lines.

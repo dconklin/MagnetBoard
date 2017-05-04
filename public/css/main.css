@@ -3,6 +3,7 @@ body {
   margin: auto;
   padding: 0;
   font-family: 'Source Sans Pro';
+  color: #382c47;
 }
 
 div {
@@ -31,13 +32,19 @@ div {
   padding: 5 0 5 0;
 }
 
+#optionsbar-info{
+  font-size: 12px;
+  margin: -20 0 5 0;
+  color: #f45942;
+}
+
 .label {
   display: inline-block;
   font-weight: bold;
 }
 
 #searchQuery {
-  width: 250px;
+  width: 100px;
 }
 
 .inputval, .btn{
@@ -46,6 +53,19 @@ div {
   height: 20px;
   width: 80px;
   font-size: 12px;
-  margin-right: 9px;
+  margin-right: 12px;
 
+}
+
+#wordAdder {
+  float: clear;
+  display: block;
+  font-size: 12px;
+  width:inherit;
+  margin: -10 0 0 0;
+  padding: 5 0 5 0;
+}
+
+#userText {
+  width: 300px;
 }

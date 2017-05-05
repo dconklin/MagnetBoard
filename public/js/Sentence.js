@@ -1,5 +1,15 @@
+/**
+ * var Sentence - Sentence Object. The sentence object is what handles making the
+ * Word objects and laying them out in a line together. The sentence also draws
+ * all the Word objects inside.
+ *
+ * @constructor
+ * @param  {String} text The text of the sentence.
+ * @param  {Number} x    X-coordinate that the sentence should be drawn at.
+ * @param  {Number} y    Y-coordinate that the sentence should be drawn at.
+ * @return {undefined}      None.
+ */
 var Sentence = function(text, x, y) {
-
   this.text = text;
   this.splitWords = this.text.split(' ');
   this.wordCount = this.splitWords.length;
@@ -8,17 +18,25 @@ var Sentence = function(text, x, y) {
   this.x = x;
   this.y = y;
   this.maxWidth = 0;
-  this.isBuilt = false;
-
+  this.isBuilt = false; // used to check whether or not the sentence needs building.
 };
 
+
+/**
+ * Sentence.prototype.run - Helper function that calls the methods required for
+ * building and displaying the sentence.
+ *
+ * @return {undefined}  None.
+ */
 Sentence.prototype.run = function() {
+
+  // Check if we've already built this sentence.
   if (!this.isBuilt) {
-    this.make();
-    this.layout();
+    this.make(); // make all the Word Objects
+    this.layout(); // position all the Word Objects
     this.isBuilt = true;
   }
-  this.display();
+  this.display(); // Show the sentence (display all the Word Objects);
 }
 
 Sentence.prototype.make = function() {

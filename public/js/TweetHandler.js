@@ -1,10 +1,20 @@
+/**
+ * var TweetHandler - This Object parses the tweets. Instantiate this object,
+ * then use TweetHandler.update() to pass it tweets. This handles both the creation
+ * of Sentence (and subsequently Word) objects as well as getting location data
+ * from the tweets to be used to create a radar and place the Sentences.
+ *
+ * @constructor
+ * @return {undefined}  None.
+ */
 var TweetHandler = function() {
 
-  this.tweets;
+  this.tweets; // holds tweet objects.
   this.count;
-  this.messages = [];
-  this.locations = [];
+  this.messages = []; // holds this.tweets[n].text;
+  this.locations = []; // holds this.tweets[n].coordinates.coordinates;
 
+  // base range (the entire world.)
   this.locationRange = {
     xMin: 90,
     xMax: -90,
@@ -14,6 +24,14 @@ var TweetHandler = function() {
 
 }
 
+/**
+ * TweetHandler.prototype.update - This method updates the object with new tweets.
+ * This method then calls the methods for updating the range object as well as
+ * formatting the tweet text.
+ *
+ * @param  {Array} theTweets Array of Tweet objects retrieved from the API GET.
+ * @return {undefined}           None.
+ */
 TweetHandler.prototype.update = function(theTweets) {
 
   this.tweets = theTweets; // replace all tweets.
@@ -43,8 +61,14 @@ TweetHandler.prototype.update = function(theTweets) {
 
 };
 
+/**
+ * TweetHandler.prototype.defineRange - This method updates this.locationRange
+ * with the data from each tweets. Essentially, this fits the locationrange to
+ * the range of retrieved tweets.
+ *
+ * @return {undefined}  None.
+ */
 TweetHandler.prototype.defineRange = function() {
-
 
   for (var i = 0; i < this.count; i++) {
     var coord = this.locations[i];
@@ -65,17 +89,21 @@ TweetHandler.prototype.defineRange = function() {
   var xdif = this.locationRange.xMax - this.locationRange.xMin;
   var ydif = this.locationRange.yMax - this.locationRange.yMin;
 
-
-  // this pads the edges if necessary.
+  // this pads the edges if necessary. (If you want no tweets at the very edge.)
   // this.locationRange.xMax += xdif;
   // this.locationRange.xMin -= xdif;
   // this.locationRange.yMax += ydif;
   // this.locationRange.yMin -= ydif;
 
-
-
 };
 
+/**
+ * TweetHandler.prototype.getScreenPosition - This method translates the locationRange
+ * object values (which come in Lat/Long decimal values) to screen space.
+ *
+ * @param  {Object} loc An object representing the location range.
+ * @return {undefined}     None.
+ */
 TweetHandler.prototype.getScreenPosition = function(loc) {
 
   var xPos = map(loc[1], this.locationRange.xMin, this.locationRange.xMax, w.canvasSize
@@ -89,23 +117,33 @@ TweetHandler.prototype.getScreenPosition = function(loc) {
 
 };
 
+/**
+ * TweetHandler.prototype.formatTweets - This method formats the text of the tweets.
+ * It strips any URLs, decodes URI formatting for '&' characters, and removes
+ * carriage returns (new line characters).
+ *
+ * @return {undefined}  None.
+ */
 TweetHandler.prototype.formatTweets = function() {
-
   for (var i = 0; i < this.messages.length; i++) {
     this.messages[i] = this.messages[i].replace(/(?:https?|ftp):\/\/[\n\S]+/g,
       '').replace('&amp;', '&').replace('\r', '').replace('\n', '');
   }
-
 };
 
+
+/**
+ * TweetHandler.prototype.generateSentences - This method generates Sentence (and
+ * subsequently Word) objects based on the tweets. It feeds the Sentence objects
+ * both the text from the tweet as well as the location translated to screen space.
+ *
+ * @return {undefined}  None.
+ */
 TweetHandler.prototype.generateSentences = function() {
   var holder = [];
   for (var i = 0; i < this.count; i++) {
     var pos = this.getScreenPosition(this.locations[i]);
-
     holder.push(new Sentence(this.messages[i], pos[0], pos[1]));
   }
-
   return holder;
-
 };

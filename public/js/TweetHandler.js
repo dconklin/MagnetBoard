@@ -44,8 +44,10 @@ TweetHandler.prototype.update = function(theTweets) {
     // that don't.
     if (this.tweets[i].coordinates) {
       cnt++;
-      this.messages.push(this.tweets[i].text);
-      this.locations.push(this.tweets[i].coordinates.coordinates);
+      if(this.messages.indexOf(this.tweets[i].text) == -1){
+        this.messages.push(this.tweets[i].text);
+        this.locations.push(this.tweets[i].coordinates.coordinates);
+      }
     } else {
       continue;
     }

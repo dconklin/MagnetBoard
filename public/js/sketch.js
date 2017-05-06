@@ -18,8 +18,7 @@ var reloadParams = {
 }
 
 // Variables for HTML fields and buttons.
-var queryField, latitudeField, longitudeField, radiusField, countField,
-  getTweetsButton, updateButton, userTextField, submitUserTextButton;
+var userTextField, submitUserTextButton;
 
 // Initialize some more variables here.
 var w, th, sentences, dataLayer;
@@ -48,15 +47,9 @@ function preload() {
 function setup() {
 
   // Get the HTML text input fields and buttons.
-  queryField = select('#searchQuery');
-  latitudeField = select('#latitude');
-  longitudeField = select('#longitude');
-  radiusField = select('#radius');
-  countField = select('#count');
-  getTweetsButton = select('#getTweetsButton');
-  updateButton = select('#updateButton');
   userTextField = select('#userText');
   submitUserTextButton = select('#submitTextButton');
+
   dataLayer = createGraphics(prefs.windowWidth, prefs.windowHeight);
 
   // Make our canvas (where our main drawing happens).
@@ -70,28 +63,6 @@ function setup() {
   th.update(tweetHolder); // Feed tweets to tweethandler.
   sentences = th.generateSentences(); // generate sentance Objects from tweets.
 
-
-  // Update our request parameters with the data from the user input fields
-  // when we press the 'Get Tweets' button. Then, make an API GET request to
-  // retrieve the tweets. Finally, enable the 'Update' button.
-  getTweetsButton.mousePressed(function() {
-    requestParams.query = encodeURIComponent(queryField.value());
-    requestParams.latitude = latitudeField.value();
-    requestParams.longitude = longitudeField.value();
-    requestParams.radius = radiusField.value();
-    requestParams.count = countField.value();
-    getTweets();
-    reloadParams.gotTweets = true;
-  });
-
-  // Functionality for when the 'Update' button is pressed.
-  updateButton.mousePressed(function() {
-    th = new TweetHandler(); // wipe previous tweets.
-    th.update(tweetHolder); // load in new tweets.
-    sentences = th.generateSentences(); // make new Sentence objects.
-    reloadParams.doneUpdate = true; // we've done an update, disable button.
-    reloadParams.gotTweets = false; // we don't have new tweets to load.
-  });
 
   // Add a new Sentence object with the user's text when they click the
   // 'Add Text' button.
@@ -111,12 +82,6 @@ function setup() {
  */
 function draw() {
 
-  // Enable/disable buttons based on the reloadParams object's values.
-  if (!reloadParams.gotTweets) {
-    document.getElementById('updateButton').disabled = true;
-  } else {
-    document.getElementById('updateButton').disabled = false;
-  }
 
   w.init(); // start the world (builds grid, canvas, etc.)
   w.updateMouse(); // let the world know where our mouse is.

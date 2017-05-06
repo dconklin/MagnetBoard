@@ -25,7 +25,7 @@ app.use(express.static('public'));
 var Twit = require('twit');
 
 // Pulling all my twitter account info from another file
-var config = require('config.js');
+var config = require('./config.js');
 // Making a Twit object for connection to the API
 var T = new Twit(config);
 

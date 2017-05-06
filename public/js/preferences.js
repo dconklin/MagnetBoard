@@ -2,10 +2,10 @@
 
 var prefs = {
 
-  windowWidth: 1280,
-  windowHeight: 720,
-  canvasWidth: 3840,
-  canvasHeight: 2160,
+  windowWidth: 960,
+  windowHeight: 540,
+  canvasWidth: 1920,
+  canvasHeight: 1080,
 
   bgColor: '#ececec',
   gridColor: '#cccccc',
@@ -20,12 +20,12 @@ var prefs = {
   radarAlpha: 0.3 * 255, // 0-255.
 
   font: undefined, //set in preload()
-  fontSize: 14,
+  fontSize: 12,
   fontColor: '#eeeeee',
   fontBgColor: '#382c47',
   hashtagBgColor: '#f45942',
   retweetBgColor: '#b73578',
-  fontPadding: 16,
+  fontPadding: 14,
   selectionColor: '#f45942',
 
   sentenceMaxWidth: 300,

@@ -70,8 +70,8 @@ World.prototype.init = function() {
   this.makeGrid(prefs.gridCount.cols, prefs.gridCount.rows);
 
   // This draws the origin circle.
-  fill(prefs.originColor);
-  ellipse(0, 0, 20, 20);
+  // fill(prefs.originColor);
+  // ellipse(0, 0, 20, 20);
 
 
   // limit x movement.

@@ -3,11 +3,11 @@
 // is clicked. Without defaults, initial API GET when page
 // loads will fail.
 var requestParams = {
-  query: 'Brooklyn',
+  query: 'brooklyn',
   latitude: '40.697879',
   longitude: '-73.929394',
-  radius: '3',
-  count: '100'
+  radius: '1',
+  count: '1000'
 }
 
 // Booleans for checking whether to disable or enable
@@ -85,7 +85,7 @@ function draw() {
 
   w.init(); // start the world (builds grid, canvas, etc.)
   w.updateMouse(); // let the world know where our mouse is.
-  w.makeRadar(th.locationRange, 10); // Make the radar.
+  // w.makeRadar(th.locationRange, 10); // Make the radar.
 
   // Display all of the sentences.
   for (var i = 0; i < sentences.length; i++) {
@@ -183,7 +183,7 @@ function getTweets() {
   // this builds the (internal) API query to our express node.js server. That
   // API then queries the twitter search API.
   var path = '/tweets/' +
-    requestParams.query + '/' +
+    encodeURIComponent(requestParams.query) + '/' +
     requestParams.latitude + '/' +
     requestParams.longitude + '/' +
     requestParams.radius + '/' +

@@ -37,14 +37,15 @@ TweetHandler.prototype.update = function(theTweets) {
   this.tweets = theTweets; // replace all tweets.
   var cnt = 0;
 
+
   // split tweet objects into their message
   // and coordinate components
   for (var i = 0; i < theTweets.length; i++) {
     // not all tweets have coords. ignore those
     // that don't.
     if (this.tweets[i].coordinates) {
-      cnt++;
       if(this.messages.indexOf(this.tweets[i].text) == -1){
+        cnt++;
         this.messages.push(this.tweets[i].text);
         this.locations.push(this.tweets[i].coordinates.coordinates);
       }
@@ -90,12 +91,6 @@ TweetHandler.prototype.defineRange = function() {
 
   var xdif = this.locationRange.xMax - this.locationRange.xMin;
   var ydif = this.locationRange.yMax - this.locationRange.yMin;
-
-  // this pads the edges if necessary. (If you want no tweets at the very edge.)
-  // this.locationRange.xMax += xdif;
-  // this.locationRange.xMin -= xdif;
-  // this.locationRange.yMax += ydif;
-  // this.locationRange.yMin -= ydif;
 
 };
 

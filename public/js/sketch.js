@@ -53,7 +53,8 @@ function setup() {
   dataLayer = createGraphics(prefs.windowWidth, prefs.windowHeight);
 
   // Make our canvas (where our main drawing happens).
-  createCanvas(prefs.windowWidth, prefs.windowHeight);
+  mainCanvas = createCanvas(prefs.windowWidth, prefs.windowHeight);
+  mainCanvas.parent("holder");
   textSize(prefs.fontSize);
 
 

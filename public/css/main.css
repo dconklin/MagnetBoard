@@ -100,3 +100,14 @@ a:link, a:active, a:hover, a:visited #statementButton {
 #defaultCanvas0 {
   padding-bottom: 30px;
 }
+
+#footer {
+  font-size: 13px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: #484b4f;
+  color: white;
+  width: 98%;
+  text-align: center;
+  padding: 10px;
+}

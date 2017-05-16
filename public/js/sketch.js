@@ -6,7 +6,7 @@ var requestParams = {
   query: 'bushwick',
   latitude: '40.697879',
   longitude: '-73.929394',
-  radius: '2',
+  radius: '1',
   count: '1000'
 }
 
@@ -53,7 +53,8 @@ function setup() {
   dataLayer = createGraphics(prefs.windowWidth, prefs.windowHeight);
 
   // Make our canvas (where our main drawing happens).
-  createCanvas(prefs.windowWidth, prefs.windowHeight);
+  mainCanvas = createCanvas(prefs.windowWidth, prefs.windowHeight);
+  mainCanvas.parent('canvasContainer');
   textSize(prefs.fontSize);
 
 

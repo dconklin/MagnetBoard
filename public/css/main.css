@@ -3,7 +3,8 @@ body {
   margin: auto;
   padding: 0;
   font-family: 'Source Sans Pro';
-  color: #382c47;
+  color: white;
+  background-color: #61666d;
 }
 
 div {
@@ -24,21 +25,40 @@ h1,h2,h3,p{
 #heading {
   width: inherit;
   font-size: 40px;
-  font-weight: 900;
   letter-spacing: 20;
   margin: 40 0 0 0;
-  font-weight: 200;
+  font-weight: 220;
   text-align: center;
   text-transform: uppercase;
-  color: #f45942;
+  color: #77d4d6;
 }
 
 #description {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 22px;
   width: 90%;
-  margin: 30 auto;
+  margin: 30 0 0 0;
   text-align: justify;
+}
+
+#statementButton {
+  padding: 10px;
+  background-color: #77d4d6;
+  width: 180px;
+  font-size: 16px;
+  color: #484b4f;
+  margin-bottom: 40px;
+  border-radius: 5px;
+}
+
+a:link, a:active, a:hover, a:visited #statementButton {
+  text-decoration: none;
+}
+
+#submitTextButton {
+  font-size: 14px;
+  background-color: #77d4d6;
+  border: none;
 }
 
 .label {
@@ -59,12 +79,24 @@ h1,h2,h3,p{
 #wordAdder {
   float: clear;
   display: block;
-  font-size: 12px;
-  width: 511px;
+  font-size: 14px;
+  width: 531px;
   margin: 10 auto;
+  margin-bottom: 20px;
   padding: auto;
+}
+
+#addIntro {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 5px;
+  margin-top: 1px;
 }
 
 #userText {
   width: 300px;
+}
+
+#defaultCanvas0 {
+  padding-bottom: 30px;
 }

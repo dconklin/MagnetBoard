@@ -29,18 +29,23 @@
 
     <center>
     <div id='description'>
-      <p>This experimental interface — part of an in-progress exploration of discursive placemaking and nontraditional geospatial data visualization — calls upon realtime geocoded Twitter content to offer the user a canvas to produce place-based language art. The content, for now, consists of tweets that carry geospatial coordinate data and some relationship to “Bushwick” as a data query. Although the tweets are mapped onto a coordinate plane that corresponds to the grid of the Mercator projection, the visualization foregrounds their relational nature, layering content from the same location in order to draw attention the depth and simultaneity of spatial experience. The user is challenged to rearrange and remix the social media content in order to offer alternate possibilities for this landscape, endlessly in flux in both “real” and virtual space, and the opportunity to add one’s own language to the canvas insists upon the possibility of articulating place through a collective spatial poetics.</p>
+      <p>This experimental interface — part of an in-progress exploration of discursive placemaking and nontraditional geospatial data visualization — calls upon realtime geocoded Twitter content to offer the user a canvas to produce place-based language art. The content, for now, consists of tweets that carry geospatial coordinate data and some relationship to “Bushwick” as a data query. Although the tweets are mapped onto a coordinate plane that corresponds to the grid of the Mercator projection, the visualization foregrounds their relational nature, layering content from the same location in order to draw attention the depth and simultaneity of spatial experience. The user is challenged to rearrange and remix the social media content in order to offer alternate possibilities for this landscape, endlessly in flux in both “real” and virtual space, and the opportunity to add one’s own language to the canvas insists upon the possibility of articulating place through a collective spatial poetics.</p><br/>
     </div>
     </center>
 
+    <center><a href="/documentation/poeticBushwick.pdf"><p id="statementButton">Read the full statement</p></a></center>
+
+
     <div id='wordAdder'>
-      <p class='label'>Add Your Own Text:</p>
+      <p class='label' id='addIntro'>Add Your Own Text:</p>
       <input id='userText' class='topcoat-text-input inputval' value='' placeholder='Enter your text here.'/>
       <button id='submitTextButton' class='topcoat-button btn'>Add Text</button>
     </div>
 
   </div>
 
+  <div id="holder">
+  </div>
 
 </body>
 </html>

@@ -57,7 +57,6 @@ function setup() {
   textSize(prefs.fontSize);
 
 
-
   // Make new World and TweetHandler instances.
   w = new World();
   th = new TweetHandler();
@@ -65,7 +64,7 @@ function setup() {
 
 
   th.update(tweetHolder); // Feed tweets to tweethandler.
-  sentences = th.generateSentences(); // generate sentance Objects from tweets.
+  sentences = th.generateSentences(); // generate sentence Objects from tweets.
 
 
 
@@ -74,7 +73,6 @@ function setup() {
   submitUserTextButton.mousePressed(function() {
     sentences.push(new Sentence(userTextField.value(), 0, 0));
   });
-
 
 
 } // end setup.

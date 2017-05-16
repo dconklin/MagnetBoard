@@ -89,7 +89,7 @@ Word.prototype.display = function() {
   this.update();
 
   // Change font if there's an Emoji. Most non-default fonts don't have
-  // glyphs for emojus. Default to Arial.
+  // glyphs for emojis. Default to Arial.
   if (this.text.match(/[\uD800-\uDFFF]./g) != null) {
     textFont('Arial'); // Should this not be hard coded?
   } else {

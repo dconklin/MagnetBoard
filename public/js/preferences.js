@@ -23,10 +23,10 @@ var prefs = {
   fontSize: 12,
   fontColor: '#eeeeee',
   fontBgColor: '#382c47',
-  hashtagBgColor: '#f45942',
-  retweetBgColor: '#b73578',
+  hashtagBgColor: '#087577',
+  retweetBgColor: '#0cb0b7',
   fontPadding: 14,
-  selectionColor: '#f45942',
+  selectionColor: '#77d4d6',
 
   sentenceMaxWidth: 300,
   wordSpacing: 1,
